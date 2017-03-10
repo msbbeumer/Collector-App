@@ -11,6 +11,32 @@ import UIKit
 class ItemsViewController: UITableViewController {
     var itemStore: ItemStore!
     
+    @IBAction func addNewItem(_ sender: UIButton) {
+        // Create a new item and add it to the store
+        let newItem = itemStore.createItem()
+        
+        // Figure out where that item is in the array
+        if let index = itemStore.allItems.index(of: newItem) {
+            let indexPath = IndexPath(row: index, section: 0)
+            
+            // Insert this new row into the table
+            tableView.insertRows(at: [indexPath], with: .automatic)
+        }
+    }
+    
+    @IBAction func toggleEditingMode(_ sender: UIButton) {
+        
+        if isEditing {
+            sender.setTitle("Edit", for: .normal)
+            
+            setEditing(false, animated: true)
+        } else {
+            sender.setTitle("Done", for: .normal)
+            
+            setEditing(true, animated: true)
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -24,12 +50,7 @@ class ItemsViewController: UITableViewController {
         
         // Set the row heights equal to 60 points
         tableView.rowHeight = 60
-        tableView.backgroundView = UIImageView(image: #imageLiteral(resourceName: "images-1"))
-    }
-    
-    // Set the section footers
-    override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-            return "No more items!"
+        tableView.backgroundView = UIImageView(image: #imageLiteral(resourceName: "iPhone 7 Plus background"))
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

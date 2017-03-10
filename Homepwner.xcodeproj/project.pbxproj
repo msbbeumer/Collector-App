@@ -103,10 +103,10 @@
 			children = (
 				59F077161E72EE8400EA010B /* AppDelegate.swift */,
 				59F0771A1E72EE8400EA010B /* Main.storyboard */,
-				59F0771D1E72EE8400EA010B /* Assets.xcassets */,
 				59F077441E72EFBF00EA010B /* ItemsViewController.swift */,
 				59F077481E72F53100EA010B /* ItemStore.swift */,
 				59F077461E72F10300EA010B /* Item.swift */,
+				59F0771D1E72EE8400EA010B /* Assets.xcassets */,
 				59F0771F1E72EE8400EA010B /* LaunchScreen.storyboard */,
 				59F077221E72EE8400EA010B /* Info.plist */,
 			);
@@ -511,6 +511,7 @@
 				59F0773D1E72EE8400EA010B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		59F0773E1E72EE8400EA010B /* Build configuration list for PBXNativeTarget "HomepwnerTests" */ = {
 			isa = XCConfigurationList;
@@ -519,6 +520,7 @@
 				59F077401E72EE8400EA010B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		59F077411E72EE8400EA010B /* Build configuration list for PBXNativeTarget "HomepwnerUITests" */ = {
 			isa = XCConfigurationList;
@@ -527,6 +529,7 @@
 				59F077431E72EE8400EA010B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
