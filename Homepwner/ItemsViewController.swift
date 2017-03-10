@@ -27,49 +27,16 @@ class ItemsViewController: UITableViewController {
         tableView.backgroundView = UIImageView(image: #imageLiteral(resourceName: "images-1"))
     }
     
-    // Get the number of sections
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return itemStore.sectionTitles.count
-    }
-    
-    // Set the section titles
-    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return itemStore.sectionTitles[section]
-    }
-    
-    // Set the section footers
-    override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-        switch section {
-        case 0:
-            return nil
-        default:
-            return "No more items!"
-        }
-    }
-    
-    // Get the number of rows in each section
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        switch section {
-        case 0:
-            return itemStore.cheapItems.count
-        default:
-            return itemStore.expensiveItems.count
-        }
+        return itemStore.allItems.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // Get a new or recycled cell
         let cell = tableView.dequeueReusableCell(withIdentifier: "UITableViewCell", for: indexPath)
-        var item = Item()
         
         // Set the text on the cell with the description of the item that is at the nth index of items, where n = row this cell will apear in on the tableview
-        switch indexPath.section {
-        case 0:
-            item = itemStore.cheapItems[indexPath.row]
-        default:
-            item = itemStore.expensiveItems[indexPath.row]
-        }
+        let item = itemStore.allItems[indexPath.row]
         
         cell.textLabel?.text = item.name
         cell.detailTextLabel?.text = "$\(item.valueInDollars)"
