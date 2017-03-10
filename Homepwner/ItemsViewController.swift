@@ -27,6 +27,11 @@ class ItemsViewController: UITableViewController {
         tableView.backgroundView = UIImageView(image: #imageLiteral(resourceName: "images-1"))
     }
     
+    // Set the section footers
+    override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+            return "No more items!"
+    }
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return itemStore.allItems.count
     }
