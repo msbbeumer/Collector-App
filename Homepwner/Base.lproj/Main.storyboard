@@ -22,17 +22,17 @@
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aPR-nB-6m2">
-                                    <rect key="frame" x="192" y="7" width="175" height="30"/>
+                                    <rect key="frame" x="191.5" y="7" width="175.5" height="30"/>
                                     <state key="normal" title="Edit"/>
                                     <connections>
-                                        <action selector="toggleEditingMode:" destination="pZx-76-26b" eventType="touchUpInside" id="0Nf-Fd-IPN"/>
+                                        <action selector="toggleEditingMode:" destination="pZx-76-26b" eventType="touchUpInside" id="Oj7-HA-Bdr"/>
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fIb-cm-gBp">
-                                    <rect key="frame" x="8" y="7" width="176" height="30"/>
+                                    <rect key="frame" x="8" y="7" width="175.5" height="30"/>
                                     <state key="normal" title="Add"/>
                                     <connections>
-                                        <action selector="addNewItem:" destination="pZx-76-26b" eventType="touchUpInside" id="6mn-Ke-yfa"/>
+                                        <action selector="addNewItem:" destination="pZx-76-26b" eventType="touchUpInside" id="SlV-87-5cp"/>
                                     </connections>
                                 </button>
                             </subviews>
@@ -51,18 +51,18 @@
                                 <rect key="frame" x="0.0" y="72" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="DqL-uQ-VEW" id="FOJ-uZ-ENs">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="2eW-LW-3Jy">
-                                            <rect key="frame" x="15" y="12" width="33.5" height="20.5"/>
+                                            <rect key="frame" x="15" y="11" width="34" height="21"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="uxH-8v-kSj">
-                                            <rect key="frame" x="316" y="12" width="44" height="20.5"/>
+                                            <rect key="frame" x="316" y="11" width="44" height="21"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
