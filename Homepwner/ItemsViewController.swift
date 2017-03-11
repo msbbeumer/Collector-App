@@ -78,8 +78,8 @@ class ItemsViewController: UITableViewController {
             let item = itemStore.allItems[indexPath.row]
             
             // Create the actionSheet UIAlertController to warn about deleting the row
-            let title = "Delte \(item.name)?"
-            let message = "Are you sure you want to delte this item?"
+            let title = "Remove \(item.name)?"
+            let message = "Are you sure you want to remove this item?"
             let ac = UIAlertController(title: title,
                                        message: message,
                                        preferredStyle: .actionSheet)
