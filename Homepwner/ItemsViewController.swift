@@ -12,18 +12,12 @@ class ItemsViewController: UITableViewController {
     var itemStore: ItemStore!
     
     @IBAction func addNewItem(_ sender: UIButton) {
-        
         // Create a new item and add it to the store
         let newItem = itemStore.createItem()
         
         // Figure out where that item is in the array
-        if let index = itemStore.cheapItems.index(of: newItem) {
+        if let index = itemStore.allItems.index(of: newItem) {
             let indexPath = IndexPath(row: index, section: 0)
-            
-            // Insert this new row into the table
-            tableView.insertRows(at: [indexPath], with: .automatic)
-        } else if let index = itemStore.expensiveItems.index(of: newItem) {
-            let indexPath = IndexPath(row: index, section: 1)
             
             // Insert this new row into the table
             tableView.insertRows(at: [indexPath], with: .automatic)
@@ -59,49 +53,16 @@ class ItemsViewController: UITableViewController {
         tableView.backgroundView = UIImageView(image: #imageLiteral(resourceName: "iPhone 7 Plus background"))
     }
     
-    // Get the number of sections
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return itemStore.sectionTitles.count
-    }
-    
-    // Set the section titles
-    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return itemStore.sectionTitles[section]
-    }
-    
-    // Set the section footers
-    /* override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-        switch section {
-        case 0:
-            return nil
-        default:
-            return "That's all the functionality we have to offer!"
-        }
-    } */
-    
-    // Get the number of rows in each section
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        switch section {
-        case 0:
-            return itemStore.cheapItems.count
-        default:
-            return itemStore.expensiveItems.count
-        }
+        return itemStore.allItems.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // Get a new or recycled cell
         let cell = tableView.dequeueReusableCell(withIdentifier: "UITableViewCell", for: indexPath)
-        var item = Item()
         
         // Set the text on the cell with the description of the item that is at the nth index of items, where n = row this cell will apear in on the tableview
-        switch indexPath.section {
-        case 0:
-            item = itemStore.cheapItems[indexPath.row]
-        default:
-            item = itemStore.expensiveItems[indexPath.row]
-        }
+        let item = itemStore.allItems[indexPath.row]
         
         cell.textLabel?.text = item.name
         cell.detailTextLabel?.text = "$\(item.valueInDollars)"
@@ -113,13 +74,9 @@ class ItemsViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         // If the table view is asking to commit a delete command...
-        var item = Item()
         if editingStyle == .delete {
-            if  indexPath.section == 0 {
-                item = itemStore.cheapItems[indexPath.row]
-            } else {
-                item = itemStore.expensiveItems[indexPath.row]
-            }
+            let item = itemStore.allItems[indexPath.row]
+            
             // Create the actionSheet UIAlertController to warn about deleting the row
             let title = "Remove \(item.name)?"
             let message = "Are you sure you want to remove this item?"
@@ -154,6 +111,6 @@ class ItemsViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         // Update the model
-        itemStore.moveItem(originSection: sourceIndexPath.section, from: sourceIndexPath.row, destinationSection: destinationIndexPath.section, to: destinationIndexPath.row)
+        itemStore.moveItem(from: sourceIndexPath.row, to: destinationIndexPath.row)
     }
 }
