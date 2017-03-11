@@ -121,7 +121,7 @@ class ItemsViewController: UITableViewController {
                 item = itemStore.expensiveItems[indexPath.row]
             }
             // Create the actionSheet UIAlertController to warn about deleting the row
-            let title = "Delte \(item.name)?"
+            let title = "Remove \(item.name)?"
             let message = "Are you sure you want to remove this item?"
             let ac = UIAlertController(title: title,
                                        message: message,
@@ -139,11 +139,17 @@ class ItemsViewController: UITableViewController {
                 self.tableView.deleteRows(at: [indexPath], with: .automatic)
                 
             })
+            
+                
             ac.addAction(deletAction)
             
             // Present the alert controller
             present(ac, animated: true, completion: nil)
         }
+    }
+    
+    override func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath) -> String? {
+        return "Remove"
     }
     
     override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
