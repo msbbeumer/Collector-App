@@ -122,7 +122,7 @@ class ItemsViewController: UITableViewController {
             }
             // Create the actionSheet UIAlertController to warn about deleting the row
             let title = "Delte \(item.name)?"
-            let message = "Are you sure you want to delte this item?"
+            let message = "Are you sure you want to remove this item?"
             let ac = UIAlertController(title: title,
                                        message: message,
                                        preferredStyle: .actionSheet)
@@ -130,7 +130,7 @@ class ItemsViewController: UITableViewController {
             let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
             ac.addAction(cancelAction)
             
-            let deletAction = UIAlertAction(title: "Delete", style: .destructive, handler: { (action) -> Void in
+            let deletAction = UIAlertAction(title: "Remove", style: .destructive, handler: { (action) -> Void in
                 
                 // Remove the item from the store
                 self.itemStore.removeItem(item)
