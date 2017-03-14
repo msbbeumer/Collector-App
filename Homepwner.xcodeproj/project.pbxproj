@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		595E2DAC1E7872A40086EDF5 /* ItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595E2DAB1E7872A40086EDF5 /* ItemCell.swift */; };
+		595E2DAE1E78A1970086EDF5 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595E2DAD1E78A1970086EDF5 /* DetailViewController.swift */; };
 		59F077171E72EE8400EA010B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59F077161E72EE8400EA010B /* AppDelegate.swift */; };
 		59F0771C1E72EE8400EA010B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 59F0771A1E72EE8400EA010B /* Main.storyboard */; };
 		59F0771E1E72EE8400EA010B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 59F0771D1E72EE8400EA010B /* Assets.xcassets */; };
@@ -36,6 +38,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		595E2DAB1E7872A40086EDF5 /* ItemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemCell.swift; sourceTree = "<group>"; };
+		595E2DAD1E78A1970086EDF5 /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		59F077131E72EE8400EA010B /* Homepwner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Homepwner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		59F077161E72EE8400EA010B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		59F0771B1E72EE8400EA010B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -104,6 +108,8 @@
 				59F077161E72EE8400EA010B /* AppDelegate.swift */,
 				59F0771A1E72EE8400EA010B /* Main.storyboard */,
 				59F077441E72EFBF00EA010B /* ItemsViewController.swift */,
+				595E2DAD1E78A1970086EDF5 /* DetailViewController.swift */,
+				595E2DAB1E7872A40086EDF5 /* ItemCell.swift */,
 				59F077481E72F53100EA010B /* ItemStore.swift */,
 				59F077461E72F10300EA010B /* Item.swift */,
 				59F0771D1E72EE8400EA010B /* Assets.xcassets */,
@@ -268,7 +274,9 @@
 				59F077451E72EFBF00EA010B /* ItemsViewController.swift in Sources */,
 				59F077471E72F10300EA010B /* Item.swift in Sources */,
 				59F077491E72F53100EA010B /* ItemStore.swift in Sources */,
+				595E2DAE1E78A1970086EDF5 /* DetailViewController.swift in Sources */,
 				59F077171E72EE8400EA010B /* AppDelegate.swift in Sources */,
+				595E2DAC1E7872A40086EDF5 /* ItemCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -48,6 +48,8 @@ class ItemsViewController: UITableViewController {
         tableView.contentInset = insets
         tableView.scrollIndicatorInsets = insets
         
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 65
         tableView.backgroundView = UIImageView(image: #imageLiteral(resourceName: "iPhone 7 Plus background"))
     }
     
@@ -57,24 +59,33 @@ class ItemsViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // Get a new or recycled cell
-        let cell = tableView.dequeueReusableCell(withIdentifier: "UITableViewCell", for: indexPath)
         
         if indexPath.row >= itemStore.allItems.count {
+            let cell = UITableViewCell(style: .default, reuseIdentifier: "UITableViewCell")
+
             cell.textLabel?.text = "No more items... "
             cell.detailTextLabel?.text = nil
             cell.textLabel?.font = cell.textLabel?.font.withSize(16)
+            
+            return cell
         } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "ItemCell", for: indexPath) as! ItemCell
+            
             // Set the text on the cell with the description of the item that is at the nth index of items, where n = row this cell will apear in on the tableview
             let item = itemStore.allItems[indexPath.row]
             
-            cell.textLabel?.text = item.name
-            cell.detailTextLabel?.text = "$\(item.valueInDollars)"
-            cell.heightAnchor.constraint(equalToConstant: 60)
-            cell.textLabel?.font = cell.textLabel?.font.withSize(20)
-            cell.detailTextLabel?.font = cell.textLabel?.font.withSize(20)
+            // Configure the cell with the Item
+            cell.nameLabel.text = item.name
+            cell.serialNumberLabel.text = item.serialNumber
+            cell.valueLabel.text = "$\(item.valueInDollars)"
+            if item.valueInDollars < 50 {
+                cell.valueLabel.textColor = UIColor.green
+            } else {
+                cell.valueLabel.textColor = UIColor.red
+            }
+            
+            return cell
         }
-        
-        return cell
     }
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
@@ -139,6 +150,22 @@ class ItemsViewController: UITableViewController {
             itemStore.moveItem(from: sourceIndexPath.row, to: sourceIndexPath.row)
         } else {
             itemStore.moveItem(from: sourceIndexPath.row, to: destinationIndexPath.row)
+        }
+    }
+    
+    // Manage the detail segue viewer
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // If the triggered segue is the "showItem" segue
+        switch segue.identifier {
+        case "showItem"?:
+            // Figure out which row was just tapped
+            if let row = tableView.indexPathForSelectedRow?.row {
+                    let item = itemStore.allItems[row]
+                    let detailViewController = segue.destination as! DetailViewController
+                    detailViewController.item = item
+            }
+        default:
+            preconditionFailure("Unexpected segue identifier")
         }
     }
 }
