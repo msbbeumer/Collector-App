@@ -48,26 +48,31 @@ class ItemsViewController: UITableViewController {
         tableView.contentInset = insets
         tableView.scrollIndicatorInsets = insets
         
-        // Set the row heights equal to 60 points
-        tableView.rowHeight = 60
         tableView.backgroundView = UIImageView(image: #imageLiteral(resourceName: "iPhone 7 Plus background"))
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return itemStore.allItems.count
+        return itemStore.allItems.count + 1
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // Get a new or recycled cell
         let cell = tableView.dequeueReusableCell(withIdentifier: "UITableViewCell", for: indexPath)
         
-        // Set the text on the cell with the description of the item that is at the nth index of items, where n = row this cell will apear in on the tableview
-        let item = itemStore.allItems[indexPath.row]
-        
-        cell.textLabel?.text = item.name
-        cell.detailTextLabel?.text = "$\(item.valueInDollars)"
-        cell.textLabel?.font = cell.textLabel?.font.withSize(20)
-        cell.detailTextLabel?.font = cell.textLabel?.font.withSize(20)
+        if indexPath.row >= itemStore.allItems.count {
+            cell.textLabel?.text = "No more items... "
+            cell.detailTextLabel?.text = nil
+            cell.textLabel?.font = cell.textLabel?.font.withSize(16)
+        } else {
+            // Set the text on the cell with the description of the item that is at the nth index of items, where n = row this cell will apear in on the tableview
+            let item = itemStore.allItems[indexPath.row]
+            
+            cell.textLabel?.text = item.name
+            cell.detailTextLabel?.text = "$\(item.valueInDollars)"
+            cell.heightAnchor.constraint(equalToConstant: 60)
+            cell.textLabel?.font = cell.textLabel?.font.withSize(20)
+            cell.detailTextLabel?.font = cell.textLabel?.font.withSize(20)
+        }
         
         return cell
     }
@@ -105,12 +110,35 @@ class ItemsViewController: UITableViewController {
         }
     }
     
+    // Can't edit the bottom row
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        if indexPath.row >= itemStore.allItems.count {
+            return false
+        }
+        return true
+    }
+    
+    // Can't move anything past the bottom row
+    override func tableView(_ tableView: UITableView, targetIndexPathForMoveFromRowAt sourceIndexPath: IndexPath, toProposedIndexPath proposedDestinationIndexPath: IndexPath) -> IndexPath {
+        if proposedDestinationIndexPath.row >= itemStore.allItems.count {
+            return sourceIndexPath
+        }
+        return proposedDestinationIndexPath
+        
+    }
+    
+    // Change the title of the DeleteConfirmation button
     override func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath) -> String? {
         return "Remove"
     }
     
+    // Update the model for when a row is moved
     override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         // Update the model
-        itemStore.moveItem(from: sourceIndexPath.row, to: destinationIndexPath.row)
+        if destinationIndexPath.row >= itemStore.allItems.count {
+            itemStore.moveItem(from: sourceIndexPath.row, to: sourceIndexPath.row)
+        } else {
+            itemStore.moveItem(from: sourceIndexPath.row, to: destinationIndexPath.row)
+        }
     }
 }
