@@ -11,7 +11,7 @@ import UIKit
 class ItemsViewController: UITableViewController {
     var itemStore: ItemStore!
     
-    @IBAction func addNewItem(_ sender: UIButton) {
+    @IBAction func addNewItem(_ sender: UIBarButtonItem) {
         // Create a new item and add it to the store
         let newItem = itemStore.createItem()
         
@@ -24,29 +24,23 @@ class ItemsViewController: UITableViewController {
         }
     }
     
-    @IBAction func toggleEditingMode(_ sender: UIButton) {
+    // Add the edit button item to the Navigation control
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
         
-        if isEditing {
-            sender.setTitle("Edit", for: .normal)
-            
-            setEditing(false, animated: true)
-        } else {
-            sender.setTitle("Done", for: .normal)
-            
-            setEditing(true, animated: true)
-        }
+        navigationItem.rightBarButtonItem = editButtonItem
     }
     
+    // Load changes to the model that were made in the detail view
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        tableView.reloadData()
+    }
+    
+    // Set row height, background image
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Get the height of the status bar
-        let statusBarHeight = UIApplication.shared.statusBarFrame.height
-        
-        // Format top table view inset equal to the height of the status bar
-        let insets = UIEdgeInsets(top: statusBarHeight, left: 0, bottom: 0, right: 0)
-        tableView.contentInset = insets
-        tableView.scrollIndicatorInsets = insets
         
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 65
