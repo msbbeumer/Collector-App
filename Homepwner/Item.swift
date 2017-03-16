@@ -25,8 +25,8 @@ class Item: NSObject {
     
     convenience init(random: Bool = false) {
         if random {
-            let adjectives = ["Rich", "Deep", "Shiny"]
-            let nouns = ["Feature", "Functionality", "Property"]
+            let adjectives = ["Antique", "Modern", "Neo-Classical"]
+            let nouns = ["Furniture", "Painting", "Artifact"]
             
             var idx = arc4random_uniform(UInt32(adjectives.count))
             let randomAdjective = adjectives[Int(idx)]
@@ -35,7 +35,7 @@ class Item: NSObject {
             let randomNoun = nouns[Int(idx)]
             
             let randomName = "\(randomAdjective) \(randomNoun)"
-            let randomValue = Int(arc4random_uniform(100))
+            let randomValue = Int(arc4random_uniform(2000))
             let randomSerialNumberGenerator = UUID().uuidString.components(separatedBy: "-")
             let randomSerialNumber = randomSerialNumberGenerator.first!
             

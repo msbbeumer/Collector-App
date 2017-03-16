@@ -69,11 +69,25 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
         serialNumberField.text = item.serialNumber
         valueField.text = numberFormatter.string(from: NSNumber(value: item.valueInDollars))
         dateLabel.text = dateFormatter.string(from: item.dateCreated)
+        
+        
     }
     
-    // Dismiss the keyboard on pressing the return key
+    // Dismiss the keyboard on pressing the return key using the UITextFieldDelegate
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
+    }
+    
+    // Prepare segue for DatePickerViewController
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        switch segue.identifier {
+        case "showDate"?:
+            let datePickerViewController = segue.destination as! DatePickerViewController
+            datePickerViewController.item = item
+        default:
+            preconditionFailure("Unexpected segue identifier")
+            
+        }
     }
 }

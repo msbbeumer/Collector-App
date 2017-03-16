@@ -10,7 +10,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Homepwner-->
+        <!--Collection-->
         <scene sceneID="5Cp-Cz-oVP">
             <objects>
                 <tableViewController id="pZx-76-26b" customClass="ItemsViewController" customModule="Homepwner" customModuleProvider="target" sceneMemberID="viewController">
@@ -68,7 +68,7 @@
                             <outlet property="delegate" destination="pZx-76-26b" id="huQ-DG-Tby"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Homepwner" id="STT-bv-uZn">
+                    <navigationItem key="navigationItem" title="Collection" id="STT-bv-uZn">
                         <barButtonItem key="leftBarButtonItem" systemItem="add" id="UOK-Mh-9Fh">
                             <connections>
                                 <action selector="addNewItem:" destination="pZx-76-26b" id="LVf-AW-duT"/>
@@ -167,6 +167,9 @@
                                             <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="248" contentHorizontalAlignment="center" contentVerticalAlignment="top" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i1h-sx-Wfq">
                                                 <rect key="frame" x="126.5" y="20.5" width="90" height="452.5"/>
                                                 <state key="normal" title="Change Date"/>
+                                                <connections>
+                                                    <segue destination="AGV-V7-mXy" kind="show" identifier="showDate" id="cx6-KK-9iY"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -204,6 +207,42 @@
                 </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1820" y="131.78410794602701"/>
+        </scene>
+        <!--Date Picker View Controller-->
+        <scene sceneID="fpI-WU-b6T">
+            <objects>
+                <viewController id="AGV-V7-mXy" customClass="DatePickerViewController" customModule="Homepwner" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="4XX-xN-2cr"/>
+                        <viewControllerLayoutGuide type="bottom" id="U5H-hd-PkA"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="INd-Zl-GiQ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="dhb-BP-Stx">
+                                <rect key="frame" x="27" y="225" width="320" height="216"/>
+                                <date key="date" timeIntervalSinceReferenceDate="511310354.91039801">
+                                    <!--2017-03-15 22:39:14 +0000-->
+                                </date>
+                                <connections>
+                                    <action selector="valueChanged:forEvent:" destination="AGV-V7-mXy" eventType="valueChanged" id="D3m-DT-eLE"/>
+                                </connections>
+                            </datePicker>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="dhb-BP-Stx" firstAttribute="centerX" secondItem="INd-Zl-GiQ" secondAttribute="centerX" id="3sp-iW-aqq"/>
+                            <constraint firstItem="dhb-BP-Stx" firstAttribute="centerY" secondItem="INd-Zl-GiQ" secondAttribute="centerY" id="Muq-KT-7Hb"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="datePicker" destination="dhb-BP-Stx" id="v1t-5p-AZa"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bn2-oc-wIY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2614" y="132"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="9i7-8D-c1T">
