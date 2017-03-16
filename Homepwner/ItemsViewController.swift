@@ -10,6 +10,7 @@ import UIKit
 
 class ItemsViewController: UITableViewController {
     var itemStore: ItemStore!
+    var imageStore: ImageStore!
     
     @IBAction func addNewItem(_ sender: UIBarButtonItem) {
         // Create a new item and add it to the store
@@ -44,7 +45,7 @@ class ItemsViewController: UITableViewController {
         
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 65
-        tableView.backgroundView = UIImageView(image: #imageLiteral(resourceName: "iPhone 7 Plus background"))
+        tableView.backgroundView = UIImageView(image: #imageLiteral(resourceName: "iPhone 7 background"))
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -102,6 +103,9 @@ class ItemsViewController: UITableViewController {
                 // Remove the item from the store
                 self.itemStore.removeItem(item)
                 
+                // Remove the item's image from the image store
+                self.imageStore.deleteImage(forKey: item.itemKey)
+                
                 // Also remove that row from the table view with an animation
                 self.tableView.deleteRows(at: [indexPath], with: .automatic)
                 
@@ -154,9 +158,10 @@ class ItemsViewController: UITableViewController {
         case "showItem"?:
             // Figure out which row was just tapped
             if let row = tableView.indexPathForSelectedRow?.row {
-                    let item = itemStore.allItems[row]
-                    let detailViewController = segue.destination as! DetailViewController
-                    detailViewController.item = item
+                let item = itemStore.allItems[row]
+                let detailViewController = segue.destination as! DetailViewController
+                detailViewController.item = item
+                detailViewController.imageStore = imageStore
             }
         default:
             preconditionFailure("Unexpected segue identifier")

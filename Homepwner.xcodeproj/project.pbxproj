@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		592B28BF1E7B440200C13E27 /* ImageStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 592B28BE1E7B440200C13E27 /* ImageStore.swift */; };
 		59571AE11E79F4BC00AA5CDC /* SelectedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59571AE01E79F4BC00AA5CDC /* SelectedTextField.swift */; };
 		59571AE31E79FA8800AA5CDC /* DatePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59571AE21E79FA8800AA5CDC /* DatePickerViewController.swift */; };
 		595E2DAC1E7872A40086EDF5 /* ItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595E2DAB1E7872A40086EDF5 /* ItemCell.swift */; };
@@ -40,6 +41,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		592B28BE1E7B440200C13E27 /* ImageStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageStore.swift; sourceTree = "<group>"; };
 		59571AE01E79F4BC00AA5CDC /* SelectedTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectedTextField.swift; sourceTree = "<group>"; };
 		59571AE21E79FA8800AA5CDC /* DatePickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerViewController.swift; sourceTree = "<group>"; };
 		595E2DAB1E7872A40086EDF5 /* ItemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemCell.swift; sourceTree = "<group>"; };
@@ -113,6 +115,7 @@
 				59F0771A1E72EE8400EA010B /* Main.storyboard */,
 				59F077441E72EFBF00EA010B /* ItemsViewController.swift */,
 				595E2DAD1E78A1970086EDF5 /* DetailViewController.swift */,
+				592B28BE1E7B440200C13E27 /* ImageStore.swift */,
 				59571AE21E79FA8800AA5CDC /* DatePickerViewController.swift */,
 				59571AE01E79F4BC00AA5CDC /* SelectedTextField.swift */,
 				595E2DAB1E7872A40086EDF5 /* ItemCell.swift */,
@@ -282,6 +285,7 @@
 				59F077471E72F10300EA010B /* Item.swift in Sources */,
 				59F077491E72F53100EA010B /* ItemStore.swift in Sources */,
 				59571AE31E79FA8800AA5CDC /* DatePickerViewController.swift in Sources */,
+				592B28BF1E7B440200C13E27 /* ImageStore.swift in Sources */,
 				595E2DAE1E78A1970086EDF5 /* DetailViewController.swift in Sources */,
 				59F077171E72EE8400EA010B /* AppDelegate.swift in Sources */,
 				595E2DAC1E7872A40086EDF5 /* ItemCell.swift in Sources */,

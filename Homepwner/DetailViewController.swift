@@ -8,22 +8,62 @@
 
 import UIKit
 
-class DetailViewController: UIViewController, UITextFieldDelegate {
+class DetailViewController: UIViewController, UITextFieldDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     
     @IBOutlet var nameField: UITextField!
     @IBOutlet var serialNumberField: UITextField!
     @IBOutlet var valueField: UITextField!
     @IBOutlet var dateLabel: UILabel!
+    @IBOutlet var imageView: UIImageView!
 
+    // Dismiss the keyboard when the background is tapped
     @IBAction func backgroundTapped(_ sender: UITapGestureRecognizer) {
         view.endEditing(true)
     }
     
+    // Take a picture of the item with the camera icon in the toolbar of the Detail view
+    @IBAction func takePicture(_ sender: UIBarButtonItem) {
+        
+        let imagePicker = UIImagePickerController()
+        
+        // If the device has a camera, take a picture; otherwise, just pick from photo library
+        if UIImagePickerController.isSourceTypeAvailable(.camera) {
+            imagePicker.sourceType = .camera
+        } else {
+            imagePicker.sourceType = .photoLibrary
+        }
+        
+        imagePicker.delegate = self
+        
+        // Place imagePicker on the screen
+        present(imagePicker, animated: true, completion: nil)
+    }
+    
+    // Store the picture taken by the camera to the item detail using the imagePicker delegate
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        
+        // Get the image from the image picer info
+        let image = info[UIImagePickerControllerOriginalImage] as! UIImage
+        
+        // Store the image in the ImageStore for the item's key
+        imageStore.setImage(image, forKey: item.itemKey)
+        
+        // put that image on the screen in the image view
+        imageView.image = image
+        
+        // Dismiss the image picker view from the screen (must be called)
+        dismiss(animated: true, completion: nil)
+        
+    }
+    
+    // Store the item from that was selected in the ItemsViewController navigation section
     var item: Item! {
         didSet {
             navigationItem.title = item.name
         }
     }
+    
+    var imageStore: ImageStore!
     
     // Format numbers
     let numberFormatter: NumberFormatter = {
@@ -70,6 +110,12 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
         valueField.text = numberFormatter.string(from: NSNumber(value: item.valueInDollars))
         dateLabel.text = dateFormatter.string(from: item.dateCreated)
         
+        // Get the item key
+        let key = item.itemKey
+        
+        // If there is an associated image with the item display it on the image view
+        let imageToDisplay = imageStore.image(forKey: key)
+        imageView.image = imageToDisplay
         
     }
     

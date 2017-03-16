@@ -26,6 +26,7 @@ class DatePickerViewController: UIViewController {
         navigationItem.title = "Date Created"
         
         datePicker.maximumDate = Date()
+        datePicker.date = item.dateCreated
         
     }
 }
