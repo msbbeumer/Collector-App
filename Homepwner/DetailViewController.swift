@@ -15,7 +15,8 @@ class DetailViewController: UIViewController, UITextFieldDelegate, UINavigationC
     @IBOutlet var valueField: UITextField!
     @IBOutlet var dateLabel: UILabel!
     @IBOutlet var imageView: UIImageView!
-
+    @IBOutlet var deleteButton: UIBarButtonItem!
+    
     // Dismiss the keyboard when the background is tapped
     @IBAction func backgroundTapped(_ sender: UITapGestureRecognizer) {
         view.endEditing(true)
@@ -26,24 +27,54 @@ class DetailViewController: UIViewController, UITextFieldDelegate, UINavigationC
         
         let imagePicker = UIImagePickerController()
         
+        
         // If the device has a camera, take a picture; otherwise, just pick from photo library
         if UIImagePickerController.isSourceTypeAvailable(.camera) {
             imagePicker.sourceType = .camera
+            let overlayView = UIView(frame: imagePicker.cameraOverlayView!.frame)
+            
+            // Build the crosshairs and add them to the camera overlay view
+            let crosshairsLabel = UILabel()
+            crosshairsLabel.text = "+"
+            crosshairsLabel.font = UIFont.systemFont(ofSize: 50)
+            crosshairsLabel.translatesAutoresizingMaskIntoConstraints = false
+            
+            overlayView.addSubview(crosshairsLabel)
+            
+            crosshairsLabel.centerXAnchor.constraint(equalTo: overlayView.centerXAnchor)
+            crosshairsLabel.centerYAnchor.constraint(equalTo: overlayView.centerYAnchor)
+            
+            overlayView.isUserInteractionEnabled = false
+            
+            imagePicker.cameraOverlayView = overlayView
+            
+            
         } else {
             imagePicker.sourceType = .photoLibrary
         }
+        
+        imagePicker.allowsEditing = true
         
         imagePicker.delegate = self
         
         // Place imagePicker on the screen
         present(imagePicker, animated: true, completion: nil)
+        
+
+    }
+    
+    // Set up the trash tool bar button to delete the picture
+    @IBAction func deletePicture(_ sender: UIBarButtonItem) {
+        imageStore.deleteImage(forKey: item.itemKey)
+        imageView.image = nil
+        deleteButton.isEnabled = false
     }
     
     // Store the picture taken by the camera to the item detail using the imagePicker delegate
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         
-        // Get the image from the image picer info
-        let image = info[UIImagePickerControllerOriginalImage] as! UIImage
+        // Get the image from the image picker info
+        let image = info[UIImagePickerControllerEditedImage] as! UIImage
         
         // Store the image in the ImageStore for the item's key
         imageStore.setImage(image, forKey: item.itemKey)
@@ -54,7 +85,11 @@ class DetailViewController: UIViewController, UITextFieldDelegate, UINavigationC
         // Dismiss the image picker view from the screen (must be called)
         dismiss(animated: true, completion: nil)
         
+        deleteButton.isEnabled = true
+        
     }
+    
+
     
     // Store the item from that was selected in the ItemsViewController navigation section
     var item: Item! {
@@ -116,6 +151,10 @@ class DetailViewController: UIViewController, UITextFieldDelegate, UINavigationC
         // If there is an associated image with the item display it on the image view
         let imageToDisplay = imageStore.image(forKey: key)
         imageView.image = imageToDisplay
+        
+        if imageView.image == nil {
+            deleteButton.isEnabled = false
+        }
         
     }
     
