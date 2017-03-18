@@ -9,9 +9,11 @@
 import UIKit
 
 class ItemsViewController: UITableViewController {
+    // MARK: - Properties
     var itemStore: ItemStore!
     var imageStore: ImageStore!
     
+    // MARK: - Actions
     @IBAction func addNewItem(_ sender: UIBarButtonItem) {
         // Create a new item and add it to the store
         let newItem = itemStore.createItem()
@@ -25,6 +27,7 @@ class ItemsViewController: UITableViewController {
         }
     }
     
+    // MARK: - Initializer
     // Add the edit button item to the Navigation control
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -32,6 +35,7 @@ class ItemsViewController: UITableViewController {
         navigationItem.rightBarButtonItem = editButtonItem
     }
     
+    // MARK: - View life cycle
     // Load changes to the model that were made in the detail view
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -48,10 +52,13 @@ class ItemsViewController: UITableViewController {
         tableView.backgroundView = UIImageView(image: #imageLiteral(resourceName: "iPhone 7 background"))
     }
     
+    // MARK: - UITableViewDataSource methods
+    // Manage the number of rows
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return itemStore.allItems.count + 1
     }
     
+    // Load the cells for each row
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // Get a new or recycled cell
         
@@ -83,6 +90,7 @@ class ItemsViewController: UITableViewController {
         }
     }
     
+    // Build the editing styles
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         // If the table view is asking to commit a delete command...
         if editingStyle == .delete {
@@ -151,6 +159,7 @@ class ItemsViewController: UITableViewController {
         }
     }
     
+    // MARK: - Segue management
     // Manage the detail segue viewer
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // If the triggered segue is the "showItem" segue
