@@ -46,7 +46,7 @@ class Item: NSObject, NSCoding {
                       serialNumber: randomSerialNumber,
                       valueInDollars: randomValue)
         } else {
-            self.init(name: "", serialNumber: nil, valueInDollars: 0)
+            self.init(name: "New Item", serialNumber: nil, valueInDollars: 0)
         }
     }
 
