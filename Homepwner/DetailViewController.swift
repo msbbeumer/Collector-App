@@ -10,6 +10,34 @@ import UIKit
 
 class DetailViewController: UIViewController, UITextFieldDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
   
+  // MARK: - Properties
+  var item: Item! {
+    didSet {
+      navigationItem.title = item.name
+    }
+  }
+  
+  var imageStore: ImageStore!
+  
+  // MARK: - Formatters
+  // Format numbers
+  let numberFormatter: NumberFormatter = {
+    let formatter = NumberFormatter()
+    formatter.numberStyle = .decimal
+    formatter.minimumFractionDigits = 2
+    formatter.maximumFractionDigits = 2
+    
+    return formatter
+  }()
+  
+  // Format dates
+  let dateFormatter: DateFormatter = {
+    let formatter = DateFormatter()
+    formatter.dateStyle = .medium
+    formatter.timeStyle = .none
+    return formatter
+  }()
+  
   // MARK: - Outlets
   @IBOutlet var nameField: UITextField!
   @IBOutlet var serialNumberField: UITextField!
@@ -29,12 +57,9 @@ class DetailViewController: UIViewController, UITextFieldDelegate, UINavigationC
     
     let imagePicker = UIImagePickerController()
     
-    
     // If the device has a camera, take a picture; otherwise, just pick from photo library
     if UIImagePickerController.isSourceTypeAvailable(.camera) {
       imagePicker.sourceType = .camera
-            
-      
     } else {
       imagePicker.sourceType = .photoLibrary
     }
@@ -45,8 +70,6 @@ class DetailViewController: UIViewController, UITextFieldDelegate, UINavigationC
     
     // Place imagePicker on the screen
     present(imagePicker, animated: true, completion: nil)
-    
-    
   }
   
   // Set up the trash tool bar button to delete the picture
@@ -56,6 +79,7 @@ class DetailViewController: UIViewController, UITextFieldDelegate, UINavigationC
     deleteButton.isEnabled = false
   }
   
+  // MARK: - Saving the image
   // Store the picture taken by the camera to the item detail using the imagePicker delegate
   func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
     
@@ -75,35 +99,7 @@ class DetailViewController: UIViewController, UITextFieldDelegate, UINavigationC
     
   }
   
-  
-  
-  // Store the item from that was selected in the ItemsViewController navigation section
-  var item: Item! {
-    didSet {
-      navigationItem.title = item.name
-    }
-  }
-  
-  var imageStore: ImageStore!
-  
-  // Format numbers
-  let numberFormatter: NumberFormatter = {
-    let formatter = NumberFormatter()
-    formatter.numberStyle = .decimal
-    formatter.minimumFractionDigits = 2
-    formatter.maximumFractionDigits = 2
-    
-    return formatter
-  }()
-  
-  // Format dates
-  let dateFormatter: DateFormatter = {
-    let formatter = DateFormatter()
-    formatter.dateStyle = .medium
-    formatter.timeStyle = .none
-    return formatter
-  }()
-  
+  // MARK: - Manage the detail viewer view cycle
   // Update the model with any changes made in the detail view
   override func viewWillDisappear(_ animated: Bool) {
     super.viewWillDisappear(animated)
@@ -122,7 +118,7 @@ class DetailViewController: UIViewController, UITextFieldDelegate, UINavigationC
     }
   }
   
-  // Load the item data into the detail viewe
+  // Load the item data into the detail viewer
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     
@@ -144,12 +140,14 @@ class DetailViewController: UIViewController, UITextFieldDelegate, UINavigationC
     
   }
   
+  // MARK: - Methods
   // Dismiss the keyboard on pressing the return key using the UITextFieldDelegate
   func textFieldShouldReturn(_ textField: UITextField) -> Bool {
     textField.resignFirstResponder()
     return true
   }
   
+  // MARK: - Segue Management
   // Prepare segue for DatePickerViewController
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     switch segue.identifier {

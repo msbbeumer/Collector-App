@@ -9,20 +9,21 @@
 import UIKit
 
 class SelectedTextField: UITextField {
+  
+  // MARK: - Textfield selection
+  override func becomeFirstResponder() -> Bool {
+    super.becomeFirstResponder()
     
-    override func becomeFirstResponder() -> Bool {
-        super.becomeFirstResponder()
-        
-        borderStyle = .line
+    borderStyle = .line
     
-        return true
-    }
+    return true
+  }
+  
+  override func resignFirstResponder() -> Bool {
+    super.resignFirstResponder()
     
-    override func resignFirstResponder() -> Bool {
-        super.resignFirstResponder()
-        
-        borderStyle = .roundedRect
-        
-        return true
-    }
+    borderStyle = .roundedRect
+    
+    return true
+  }
 }

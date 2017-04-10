@@ -9,24 +9,25 @@
 import UIKit
 
 class DatePickerViewController: UIViewController {
+  
+  //MARK: - Outlets and Properties
+  @IBOutlet var datePicker: UIDatePicker!
+  
+  @IBAction func valueChanged(_ sender: UIDatePicker, forEvent event: UIEvent) {
+    item.dateCreated = datePicker.date
+  }
+  
+  var item: Item!
+  
+  // MARK: - View Cycle
+  // Pre-load the date that the item was created
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
     
-    @IBOutlet var datePicker: UIDatePicker!
-
-    @IBAction func valueChanged(_ sender: UIDatePicker, forEvent event: UIEvent) {
-        item.dateCreated = datePicker.date
-    }
+    navigationItem.title = "Date Created"
     
-    var item: Item!
+    datePicker.maximumDate = Date()
+    datePicker.date = item.dateCreated
     
-    
-    // Pre-load the date that the item was created
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        navigationItem.title = "Date Created"
-        
-        datePicker.maximumDate = Date()
-        datePicker.date = item.dateCreated
-        
-    }
+  }
 }
