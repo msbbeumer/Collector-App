@@ -1,4 +1,4 @@
-# Collector-App
+# CollectorApp
 
 This app was built based on the "Homepwner" app from the Big Nerd Ranch Guide to iOS Programming, 6th edition
 
